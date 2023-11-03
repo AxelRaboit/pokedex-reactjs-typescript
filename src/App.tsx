@@ -5,21 +5,22 @@ import { Pokemon } from "./utils/interface";
 
 const App = () => {
     const [pokeData, setPokeData] = useState<Pokemon[]>([]);
-    const [baseUrl, setBaseUrl] = useState<string>(
-        "https://pokeapi.co/api/v2/pokemon"
-    );
+    const [baseUrl, setBaseUrl] = useState<string>("https://pokeapi.co/api/v2/pokemon");
     const [nextUrl, setNextUrl] = useState<string | null>(null);
     const [prevUrl, setPrevUrl] = useState<string | null>(null);
     const [numberOfPokemon, setNumberOfPokemon] = useState<number>(0);
     const [limit, setLimit] = useState<number>(5);
-    const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [showLoadingIndicator, setShowLoadingIndicator] = useState<boolean>(false);
 
     const fetchPokeData = async (url: string) => {
         setIsLoading(true);
-        const apiUrl = new URL(url);
-        apiUrl.searchParams.set("limit", limit.toString());
-
+        let loadingTimeout = setTimeout(() => setShowLoadingIndicator(true), 200);
+    
         try {
+            const apiUrl = new URL(url);
+            apiUrl.searchParams.set("limit", limit.toString());
+    
             const response = await fetch(apiUrl.href);
             const data = await response.json();
             setNextUrl(data.next);
@@ -27,18 +28,21 @@ const App = () => {
             const newPokemon = await Promise.all(
                 data.results.map(async (pokemon: any) => {
                     const response = await fetch(pokemon.url);
-                    const data = await response.json();
-                    return data;
+                    return await response.json();
                 })
             );
             setPokeData(newPokemon);
-            const allPokemon = await fetch(baseUrl);
-            const allPokemonData = await allPokemon.json();
+    
+            const allPokemonResponse = await fetch(`${baseUrl}?limit=1`);
+            const allPokemonData = await allPokemonResponse.json();
             setNumberOfPokemon(allPokemonData.count);
         } catch (error) {
             console.error("Failed to fetch data:", error);
+        } finally {
+            clearTimeout(loadingTimeout);
+            setIsLoading(false);
+            setShowLoadingIndicator(false);
         }
-        setIsLoading(false);
     };
 
     useEffect(() => {
@@ -71,24 +75,20 @@ const App = () => {
                 </label>
             </div>
 
-            {isLoading ? (
+            {isLoading && showLoadingIndicator && (
                 <div className="loading-indicator">
                     <div className="loading-spinner"></div>
                 </div>
-            ) : (
+            )}
+
+            {!isLoading && (
                 <>
                     <PokemonCollection pokeData={pokeData} />
                     <div className="pagination">
-                        <button
-                            onClick={() => handlePagination(prevUrl)}
-                            disabled={!prevUrl}
-                        >
+                        <button onClick={() => handlePagination(prevUrl)} disabled={!prevUrl}>
                             Prev
                         </button>
-                        <button
-                            onClick={() => handlePagination(nextUrl)}
-                            disabled={!nextUrl}
-                        >
+                        <button onClick={() => handlePagination(nextUrl)} disabled={!nextUrl}>
                             Next
                         </button>
                     </div>
