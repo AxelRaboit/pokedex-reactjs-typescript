@@ -11,7 +11,7 @@ const App = () => {
     const [nextUrl, setNextUrl] = useState<string | null>(null);
     const [prevUrl, setPrevUrl] = useState<string | null>(null);
     const [numberOfPokemon, setNumberOfPokemon] = useState<number>(0);
-    const [limit, setLimit] = useState<number>(7);
+    const [limit, setLimit] = useState<number>(5);
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
     const fetchPokeData = async (url: string) => {
