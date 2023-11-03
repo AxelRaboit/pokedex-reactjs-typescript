@@ -66,7 +66,7 @@ const App = () => {
 
             <div className="controls">
                 <label>
-                    Items per page:
+                    Pokemon per page:
                     <select value={limit} onChange={handleLimitChange}>
                         <option value="5">5</option>
                         <option value="10">10</option>
