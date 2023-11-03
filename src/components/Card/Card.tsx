@@ -7,12 +7,14 @@ interface CardProps {
 }
 
 const Card = ({ pokemon, onClick }: CardProps) => {
+    console.log(pokemon)
     return (
         <div className={style.card} onClick={onClick}>
             <div className={style.cardImage}>
                 <img src={pokemon.sprites.front_default} alt={pokemon.name} />
             </div>
             <div className={style.cardBody}>
+                <span># {pokemon.id}</span>
                 <h3>{pokemon.name}</h3>
             </div>
         </div>

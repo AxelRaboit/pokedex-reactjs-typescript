@@ -10,3 +10,13 @@
 .cardImage {
     margin-right: 1rem;
 }
+
+.cardBody {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cardBody span {
+    margin-right: 1rem;
+}
