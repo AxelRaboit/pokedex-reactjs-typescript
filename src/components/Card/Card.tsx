@@ -1,5 +1,5 @@
 
-import { Pokemon } from "../interface";
+import { Pokemon } from "../../utils/interface";
 import style from "./Card.module.css";
 interface CardProps {
     onClick: () => void;

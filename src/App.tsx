@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-import PokemonCollection from "./components/PokemonCollection";
-import { Pokemon } from "./interface";
+import PokemonCollection from "./components/Collection/Collection";
+import { Pokemon } from "./utils/interface";
 
 const App = () => {
     const [pokeData, setPokeData] = useState<Pokemon[]>([]);
     const [url, setUrl] = useState<string>(
-        "https://pokeapi.co/api/v2/pokemon/?limit=5"
+        "https://pokeapi.co/api/v2/pokemon/?limit=7"
     );
     const [nextUrl, setNextUrl] = useState<string>("");
     const [prevUrl, setPrevUrl] = useState<string>("");

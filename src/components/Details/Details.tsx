@@ -1,5 +1,5 @@
-import style from "./PokemonDetails.module.css";
-import { Pokemon } from "../interface";
+import style from "./Details.module.css";
+import { Pokemon } from "../../utils/interface";
 
 interface PokemonDetailsProps {
     pokemon: Pokemon;

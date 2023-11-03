@@ -1,6 +1,15 @@
+.mainInfos {
+    border-radius: 5px;
+    padding: 1rem;
+    background-color: #282c34;
+}
+
+.mainInfos h2 {
+    color: #fff;
+}
+
 .mainInfos img {
     width: 100%;
-    background-color: #8be2fc;
     border-radius: 5px;
     margin-bottom: 1rem;
 }
@@ -18,7 +27,8 @@
 
 .types span {
     margin-right: 0.5rem;
-    background-color: antiquewhite;
+    background-color: #8be2fc;
+    color: #fff;
     border-radius: 5px;
     padding: .5rem;
 }

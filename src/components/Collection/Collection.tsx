@@ -1,8 +1,8 @@
 import { useState } from "react";
-import Card from "./Card";
-import PokemonDetails from "./PokemonDetails";
-import { Pokemon } from "../interface";
-import style from "./PokemonCollection.module.css";
+import Card from "../Card/Card";
+import PokemonDetails from "../Details/Details";
+import { Pokemon } from "../../utils/interface";
+import style from "./Collection.module.css";
 
 interface Props {
     pokeData: Pokemon[];
