@@ -69,3 +69,9 @@ body {
 .pagination button:first-child {
     margin-right: 1rem;
 }
+
+@media (min-width: 1024px) {
+    .controls-input input {
+        width: 400px;
+    }
+}
