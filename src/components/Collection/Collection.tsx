@@ -5,12 +5,12 @@ import { Pokemon } from "../../utils/interface";
 import style from "./Collection.module.css";
 
 interface Props {
-    pokeData: Pokemon[];
+    pokemonData: Pokemon[];
 }
 
-const PokemonCollection = ({ pokeData }: Props) => {
+const PokemonCollection = ({ pokemonData }: Props) => {
     const [selectedPokemon, setSelectedPokemon] = useState<Pokemon | null>(
-        pokeData.length > 0 ? pokeData[0] : null
+        pokemonData.length > 0 ? pokemonData[0] : null
     );
 
     const handleCardClick = (pokemon: Pokemon) => {
@@ -22,7 +22,7 @@ const PokemonCollection = ({ pokeData }: Props) => {
     return (
         <div className={style.container}>
             <div className={style.cardContainer}>
-                {pokeData.map((pokemon: Pokemon) => (
+                {pokemonData.map((pokemon: Pokemon) => (
                     <Card
                         key={pokemon.id}
                         pokemon={pokemon}

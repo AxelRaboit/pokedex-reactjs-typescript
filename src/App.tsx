@@ -3,9 +3,12 @@ import "./App.css";
 import PokemonCollection from "./components/Collection/Collection";
 import { Pokemon } from "./utils/interface";
 import DetailsBySearch from "./components/DetailsBySearch/DetailsBySearch";
+import { fetchPokemonData } from "./utils/fetchPokemon";
+import { fetchPokemonBySearch } from "./utils/fetchPokemonBySearch";
+import Loading from "./components/Loading/Loading";
 
 const App = () => {
-    const [pokeData, setPokeData] = useState<Pokemon[]>([]);
+    const [pokemonData, setPokemonData] = useState<Pokemon[]>([]);
     const [baseUrl, setBaseUrl] = useState<string>(
         "https://pokeapi.co/api/v2/pokemon"
     );
@@ -19,43 +22,17 @@ const App = () => {
     const [searchId, setSearchId] = useState<number | null>(null);
     const [searchedPokemon, setSearchedPokemon] = useState<any>(null);
 
-    const fetchPokeData = async (url: string) => {
-        setIsLoading(true);
-        let loadingTimeout = setTimeout(
-            () => setShowLoadingIndicator(true),
-            200
-        );
-
-        try {
-            const apiUrl = new URL(url);
-            apiUrl.searchParams.set("limit", limit.toString());
-
-            const response = await fetch(apiUrl.href);
-            const data = await response.json();
-            setNextUrl(data.next);
-            setPrevUrl(data.previous);
-            const newPokemon = await Promise.all(
-                data.results.map(async (pokemon: any) => {
-                    const response = await fetch(pokemon.url);
-                    return await response.json();
-                })
-            );
-            setPokeData(newPokemon);
-
-            const allPokemonResponse = await fetch(baseUrl);
-            const allPokemonData = await allPokemonResponse.json();
-            setNumberOfPokemon(allPokemonData.count);
-        } catch (error) {
-            console.error("Failed to fetch data:", error);
-        } finally {
-            clearTimeout(loadingTimeout);
-            setIsLoading(false);
-            setShowLoadingIndicator(false);
-        }
-    };
-
     useEffect(() => {
-        fetchPokeData(baseUrl);
+        fetchPokemonData(
+            baseUrl,
+            limit,
+            setPokemonData,
+            setNextUrl,
+            setPrevUrl,
+            setNumberOfPokemon,
+            setIsLoading,
+            setShowLoadingIndicator
+        );
     }, [baseUrl, limit]);
 
     const handlePagination = (url: string | null) => {
@@ -69,28 +46,8 @@ const App = () => {
         setLimit(newLimit);
     };
 
-    const handleSearch = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        const inputValue = e.target.value;
-
-        const numericId = inputValue ? Number(inputValue) : null;
-        setSearchId(numericId);
-
-        if (numericId) {
-            try {
-                const response = await fetch(
-                    `https://pokeapi.co/api/v2/pokemon/${numericId}`
-                );
-                if (!response.ok) {
-                    throw new Error("Pokémon not found");
-                }
-                const data = await response.json();
-                setSearchedPokemon(data);
-            } catch (error) {
-                console.error(error);
-            }
-        } else {
-            setSearchedPokemon(null);
-        }
+    const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+        fetchPokemonBySearch(e.target.value, setSearchId, setSearchedPokemon);
     };
 
     return (
@@ -119,15 +76,14 @@ const App = () => {
 
             {searchedPokemon && <DetailsBySearch pokemon={searchedPokemon} />}
 
-            {isLoading && showLoadingIndicator && (
-                <div className="loading-indicator">
-                    <div className="loading-spinner"></div>
-                </div>
-            )}
+            <Loading
+                isLoading={isLoading}
+                showLoadingIndicator={showLoadingIndicator}
+            />
 
             {!isLoading && (
                 <>
-                    <PokemonCollection pokeData={pokeData} />
+                    <PokemonCollection pokemonData={pokemonData} />
                     <div className="pagination">
                         <button
                             onClick={() => handlePagination(prevUrl)}
