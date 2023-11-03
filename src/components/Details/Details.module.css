@@ -54,7 +54,7 @@
     color: #fff;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
     .mainInfos {
         width: 400px;
     }

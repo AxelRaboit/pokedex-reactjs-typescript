@@ -10,11 +10,13 @@ interface Props {
 
 const PokemonCollection = ({ pokeData }: Props) => {
     const [selectedPokemon, setSelectedPokemon] = useState<Pokemon | null>(
-        null
+        pokeData.length > 0 ? pokeData[0] : null
     );
 
     const handleCardClick = (pokemon: Pokemon) => {
-        setSelectedPokemon(pokemon);
+        if (pokemon) {
+            setSelectedPokemon(pokemon);
+        }
     };
 
     return (
