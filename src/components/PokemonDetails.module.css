@@ -1,0 +1,46 @@
+.mainInfos img {
+    width: 100%;
+    background-color: #8be2fc;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+}
+
+.mainInfos {
+    margin-bottom: 1rem;
+}
+
+.types {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 1rem;
+    padding: .5rem 0;
+}
+
+.types span {
+    margin-right: 0.5rem;
+    background-color: antiquewhite;
+    border-radius: 5px;
+    padding: .5rem;
+}
+
+.stats {
+    background-color: #8be2fc;
+    padding: 1rem;
+    border-radius: 5px;
+}
+
+.stat {
+    display: flex;
+    margin-bottom: .5rem;
+}
+
+.statName {
+    margin-right: .5rem;
+    font-weight: 600;
+}
+
+@media (min-width: 768px) {
+    .mainInfos {
+        width: 400px;
+    }
+}
