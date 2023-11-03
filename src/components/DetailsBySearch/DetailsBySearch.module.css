@@ -1,3 +1,7 @@
+.container {
+    background-color: #282c34;
+    margin-bottom: 1rem;
+}
 .mainInfos {
     border-radius: 5px;
     padding: 1rem;
