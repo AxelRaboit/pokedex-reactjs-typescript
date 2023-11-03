@@ -13,6 +13,10 @@ const PokemonDetails = ({ pokemon }: PokemonDetailsProps) => {
         setShiny(!shiny);
     };
 
+    useEffect(() => {
+        setShiny(false);
+    }, [pokemon]);
+
     return (
         <div className={style.container}>
             <div className={style.mainInfos}>
@@ -53,18 +57,6 @@ const PokemonDetails = ({ pokemon }: PokemonDetailsProps) => {
                     ))}
                 </div>
             </div>
-            {/* <div className={style.stats}>
-                {pokemon.stats.map((statEntry) => (
-                    <div className={style.stat} key={statEntry.stat.name}>
-                        <div className={style.statName}>
-                            {statEntry.stat.name}:
-                        </div>
-                        <div className={style.statValue}>
-                            {statEntry.base_stat}
-                        </div>
-                    </div>
-                ))}
-            </div> */}
         </div>
     );
 };
