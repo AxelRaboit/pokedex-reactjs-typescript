@@ -33,6 +33,7 @@
     padding: .5rem;
 }
 
+
 .stats {
     background-color: #8be2fc;
     padding: 1rem;
@@ -47,6 +48,10 @@
 .statName {
     margin-right: .5rem;
     font-weight: 600;
+}
+
+.noImage {
+    color: #fff;
 }
 
 @media (min-width: 768px) {

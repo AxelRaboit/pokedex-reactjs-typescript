@@ -11,7 +11,9 @@ const Card = ({ pokemon, onClick }: CardProps) => {
     return (
         <div className={style.card} onClick={onClick}>
             <div className={style.cardImage}>
-                <img src={pokemon.sprites.front_default} alt={pokemon.name} />
+                {
+                    pokemon.sprites.front_default && <img src={pokemon.sprites.front_default} alt={pokemon.name} />
+                }
             </div>
             <div className={style.cardBody}>
                 <span># {pokemon.id}</span>
