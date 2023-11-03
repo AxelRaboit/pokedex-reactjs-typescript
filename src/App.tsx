@@ -33,7 +33,7 @@ const App = () => {
             );
             setPokeData(newPokemon);
     
-            const allPokemonResponse = await fetch(`${baseUrl}?limit=1`);
+            const allPokemonResponse = await fetch(baseUrl);
             const allPokemonData = await allPokemonResponse.json();
             setNumberOfPokemon(allPokemonData.count);
         } catch (error) {
