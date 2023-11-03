@@ -30,20 +30,30 @@ body {
     padding: 0.5rem 1rem;
 }
 
-.controls label {
+.controls-select label {
     color: #fff;
     font-size: 1.2rem;
     margin-right: 1rem;
 }
 
-.controls select {
+.controls-select select {
     background-color: #282c34;
     border: 1px solid #282c34;
     border-radius: 5px;
     color: #fff;
     cursor: pointer;
     font-size: 1.2rem;
-    margin: 1rem;
+    margin-left: 1rem;
+    padding: 0.5rem 1rem;
+}
+
+.controls-input input {
+    background-color: #282c34;
+    border: 1px solid #282c34;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 1.2rem;
+    margin: 2rem;
     padding: 0.5rem 1rem;
 }
 

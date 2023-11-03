@@ -1,13 +1,11 @@
-
 import { Pokemon } from "../../utils/interface";
 import style from "./Card.module.css";
 interface CardProps {
-    onClick: () => void;
+    onClick?: () => void;
     pokemon: Pokemon;
 }
 
 const Card = ({ pokemon, onClick }: CardProps) => {
-    console.log(pokemon)
     return (
         <div className={style.card} onClick={onClick}>
             <div className={style.cardImage}>
