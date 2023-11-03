@@ -28,13 +28,9 @@ const PokemonCollection = ({ pokeData }: Props) => {
                     />
                 ))}
             </div>
-            {selectedPokemon ? (
+            {selectedPokemon && (
                 <div className={style.detailContainer}>
                     <PokemonDetails pokemon={selectedPokemon} />
-                </div>
-            ) : (
-                <div className={style.detailContainer}>
-                    Sélectionnez un Pokémon pour voir les détails.
                 </div>
             )}
         </div>
